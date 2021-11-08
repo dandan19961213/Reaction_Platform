@@ -1,1 +1,2 @@
-# Reaction_Platform
+frontend_react是模板经过修改的前端界面代码
+其他的文件是原来项目的代码，其中frontend是Vue的前端代码
