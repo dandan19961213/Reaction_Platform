@@ -107,7 +107,7 @@
                 v-show="showMol"
               ></div>
               <!-- <div style="clear: both"></div> -->
-              <h4>当前有{{tableList2.length}}条反应</h4>
+              <h4>当前有{{tableList2.length}}条CO和H2的反应</h4>
               <ul class="ul3">
                 <li v-for="item in tableList2">
                   <span>{{item[0]}} + {{item[1]}} = <img :src="'/static/picture/picture' + item[2] + '.png'" :alt="item[2]">
@@ -125,7 +125,7 @@
                 class="mol-container"
                 v-show="showMol"
               ></div>
-              <h4>当前有{{tableList3.length}}条反应</h4>
+              <h4>当前有{{tableList3.length}}条CO和H2的反应</h4>
               <ul class="ul3">
                 <li v-for="item in tableList3">
                   <span>{{item[0]}} + {{item[1]}} = <img :src="'/static/picture/picture' + item[2] + '.png'" :alt="item[2]">
@@ -207,12 +207,6 @@ export default {
                 }],
       select: [],
 
-      // option3: [{
-      //               value: '△G',
-      //               label: '△G'
-      //           }],
-      // select3: [],
-
       tableData1: [
         {
           分子式: "C2O",
@@ -270,23 +264,25 @@ export default {
     },
 
     initChart(dataObj) {
-      var d = dataObj[0][0];
+      var d = dataObj[0][0];   // node
       var dataArr = [];
 
-      var l = dataObj[1];
+      var l = dataObj[1];     // link
       var linkArr = [];
 
       for (var k in d) {
-        if (typeof d[k] != "string") {
+        // console.log(d[k]);
+        if (typeof d[k] != "string") {    // d[k]:分子式，坐标
           dataArr.push({
             id: k,
-            name: d[k][0],
-            formula: eval(d[k][1]),
+            name: d[k][0],    // 分子式
+            formula: eval(d[k][1]),    // 分子的坐标；  eval() 函数计算或执行参数。
           });
         } else {
+          // console.log(d[k]);
           dataArr.push({
             id: k,
-            name: "△G:" + d[k] + "eV",
+            name: "△G:" + d[k] + "eV",     // // d[k]:△G的值
             itemStyle: {
               color: "#8DCC93",
               borderType: "solid",
@@ -298,8 +294,10 @@ export default {
       }
 
       for (var i = 0; i < l.length; i++) {
+        // console.log(l[i]);
+        // console.log(l[i][0]);
         linkArr.push({
-          source: l[i][0],
+          source: l[i][0],    // 反应物
           //value: l[i][1],
           target: l[i][2],
           lineStyle: {
@@ -318,8 +316,8 @@ export default {
         });
       }
 
-      // console.log(dataArr);
-      // console.log(linkArr);
+    //console.log(dataArr);
+    // console.log(linkArr);
 
       let that = this;
       let getchart = echarts.init(document.getElementById("echart-line"));
@@ -350,18 +348,6 @@ export default {
                 // curveness: 0.1
               },
             },
-            // 连接线上的文字
-            // edgeLabel: {
-            //     normal: {
-            //         show: true,
-            //         textStyle: {
-            //             fontSize: 15
-            //         },
-            //         formatter: function (x) {
-            //             return x.data.name;
-            //         }
-            //     }
-            // },
             lineStyle: {
               normal: {
                 opacity: 1,
@@ -398,10 +384,10 @@ export default {
           }
           else{
             that.text = G;
-          this.method1(that.text);
-          this.showMol = false;
-          this.showUpload = false;
-          this.showResult = true;
+            this.method1(that.text);
+            this.showMol = false;
+            this.showUpload = false;
+            this.showResult = true;
           }
         }
       });
@@ -413,12 +399,17 @@ export default {
     },
 
     method1(gib) {
-      console.log(gib);
+      // console.log(gib);
+      console.log(gib.split('g')[0])
+      var ids = gib.split('g')[0]
+      var g_val= gib.split('g')[1]
+      console.log(gib.split('g')[1])
       var self = this;
       console.log(this.$api + "/method1");
       this.$http
         .post(this.$api + "/method1", {
-          text: gib,
+          text1: ids,
+          text2: g_val,
         })
         .then((response) => {
           var res_data = response.data;
@@ -458,9 +449,9 @@ export default {
     },
     method3() {
       console.log(this.text);
-      var self = this;
+      var self = this;    // this指向调用这个函数的对象
       console.log(this.$api + "/method3");
-      this.$http.post(this.$api + "/method3", {
+      this.$http.post(this.$api + "/method3", {    // 传值给后台
           text: self.input,
           text2: self.select,
         })
@@ -483,7 +474,7 @@ export default {
   mounted() {
     let that = this;
     that.input = 0;
-    that.select =30;
+    that.select =10;
     that.method3();
     // that.text = '10\n\nO -1.7198 0.3001 -0.6366 \nC -0.5955 0.5226 0.1810 \nC 0.4990 -0.3809 -0.3810 \nO 1.6784 -0.2792 0.3172\nH -1.7928 -0.6976 -0.7744\nH -0.8417 0.2793 1.2265\nH -0.3058 1.5961 0.0499\nH 0.0687 -1.4047 -0.3970\nH 0.6048 -0.0729 -1.4556\nH 2.4047 0.1372 -0.2138'  
     // that.handleMol(that.text);

@@ -25,6 +25,8 @@ ALLOWED_EXTENSIONS = set(['traj'])  # 允许上传的文件后缀
 
 with open('C_H_all_reaction_without_H2O.txt', 'rb') as fp:
     b = pickle.load(fp)
+with open('CO_H2_products_all_reaction.txt', 'rb') as fp:
+    p = pickle.load(fp)
 
 db = connect("./qm9.db")
 data = pd.read_csv("./QM9.csv")
@@ -49,38 +51,63 @@ def allowed_file(filename):
 @app.route('/method1', methods=['POST'])
 def return_table():
     item = json.loads(request.get_data(as_text=True))
-    # print('item[text]111111111111', item['text'])
-    G = int(item['text'][2:])
+    # print('item[text]111111111111', item)
+    G = int(item['text1'][2:])
+    g = item['text2']
     # print('GGGGGGGG', G)
+    # print('ggggggggggg', g)
     res = []
     res1 = []
     res2 = []
+    res3 = []
+    res4 = []
     temp2 = {}
-    for i in range(2):
-      
-        temp1 = {}
-        temp1['分子式'] = trans_symbols(b[G][i])
-        temp1['分子系数'] = b[G][4][i * 2 + 1]
-        temp1['Gibbs/eV'] = ('%.3f' % b[G][4][i * 2])
+    temp4 = {}
+    if g == str(('%.3f' % b[G][4][6])):
+        for i in range(2):
+            temp1 = {}
+            temp1['分子式'] = trans_symbols(b[G][i])
+            temp1['分子系数'] = b[G][4][i * 2 + 1]
+            temp1['Gibbs/eV'] = ('%.3f' % b[G][4][i * 2])
 
-        res1.append(temp1)
-  
-    temp2['分子式'] = trans_symbols(b[G][2])
-    temp2['分子系数'] = b[G][4][5]
-    temp2['Gibbs/eV'] = ('%.3f' % b[G][4][4])
+            res1.append(temp1)
+            # print(res1)
+        temp2['分子式'] = trans_symbols(b[G][2])
+        temp2['分子系数'] = b[G][4][5]
+        temp2['Gibbs/eV'] = ('%.3f' % b[G][4][4])
 
-    res2.append(temp2)
-    res.append(res1)
-    res.append(res2)
-    # print('111111111111111111', res)
-    return {"tabledata": res}
+        res2.append(temp2)
+        res.append(res1)
+        res.append(res2)
+
+        return {"tabledata": res}
+    # print('1111', res)
+
+    elif g == str(('%.3f' % p[G][4][6])):
+        for i in range(2):
+            temp3 = {}
+            temp3['分子式'] = trans_symbols(p[G][i])
+            temp3['分子系数'] = p[G][4][i * 2 + 1]
+            temp3['Gibbs/eV'] = ('%.3f' % p[G][4][i * 2])
+
+            res3.append(temp3)
+            # print(res3)
+        temp4['分子式'] = trans_symbols(p[G][2])
+        temp4['分子系数'] = p[G][4][5]
+        temp4['Gibbs/eV'] = ('%.3f' % p[G][4][4])
+        res4.append(temp4)
+        res.append(res3)
+        res.append(res4)
+        # print('111111111111111111', res)
+
+        return {"tabledata": res}
 
 
 @app.route('/method2', methods=['POST'])
 def return_qm9():
     item = json.loads(request.get_data(as_text=True))
-    # print('item[text]2222222222', item['text'], item['text']
-
+    # print('item[text]2222222222', item['text'], item['text2'])
+    # interval = item['text'].split('-')
     left = int(item['text']) - 1
     right = int(item['text2']) + int(item['text']) - 1
 
@@ -89,6 +116,7 @@ def return_qm9():
     edge = {}
     link = []
     tableData = []
+    edge_p = {}
     print('loop start')
     for i in range(left, right):
         node[str(b[i][0])] = [trans_symbols(b[i][0])]
@@ -106,11 +134,28 @@ def return_qm9():
         edge[str(b[i][0]) + '-' + str(i)] = str(('%.3f' % b[i][4][0]))
         edge[str(b[i][1]) + '-' + str(i)] = str(('%.3f' % b[i][4][2]))
         edge[str(b[i][2]) + '-' + str(i)] = str(('%.3f' % b[i][4][4]))
-        node['*G' + str(i)] = str(('%.3f' % b[i][4][6]))  # G：第几条反应
+        node['*G' + str(i) + 'g' + str(('%.3f' % b[i][4][6]))] = str(('%.3f' % b[i][4][6]))  # G：第几条反应
 
-        link.append([str(b[i][0]), edge[str(b[i][0]) + '-' + str(i)], '*G' + str(i)])
-        link.append([str(b[i][1]), edge[str(b[i][1]) + '-' + str(i)], '*G' + str(i)])
-        link.append(['*G' + str(i), edge[str(b[i][2]) + '-' + str(i)], str(b[i][2])])
+        link.append([str(b[i][0]), edge[str(b[i][0]) + '-' + str(i)], '*G' + str(i) + 'g' + str(('%.3f' % b[i][4][6]))])
+        link.append([str(b[i][1]), edge[str(b[i][1]) + '-' + str(i)], '*G' + str(i) + 'g' + str(('%.3f' % b[i][4][6]))])
+        link.append(['*G' + str(i) + 'g' + str(('%.3f' % b[i][4][6])), edge[str(b[i][2]) + '-' + str(i)], str(b[i][2])])
+
+        for j in range(len(p)):
+            # print('pppppp', str(p[j][0]), str(p[j][1]))
+            if str(b[i][2]) == str(p[j][0]) or str(b[i][2]) == str(p[j][1]):
+                # print('yesyesyesyesyeysysysyyssysy')
+                node[str(p[j][0])] = [trans_symbols(p[j][0]), trans_xyz(p[j][0])]
+                node[str(p[j][1])] = [trans_symbols(p[j][1]), trans_xyz(p[j][1])]
+                node[str(p[j][2])] = [trans_symbols(p[j][2]), trans_xyz(p[j][2])]
+
+                edge_p[str(p[j][0]) + '-' + str(j)] = str(('%.3f' % p[j][4][0]))
+                edge_p[str(p[j][1]) + '-' + str(j)] = str(('%.3f' % p[j][4][2]))
+                edge_p[str(p[j][2]) + '-' + str(j)] = str(('%.3f' % p[j][4][4]))
+                node['*G' + str(j) + 'g' + str(('%.3f' % p[j][4][6]))] = str(('%.3f' % p[j][4][6]))
+
+                link.append([str(p[j][0]), edge_p[str(p[j][0]) + '-' + str(j)], '*G' + str(j) + 'g' + str(('%.3f' % p[j][4][6]))])
+                link.append([str(p[j][1]), edge_p[str(p[j][1]) + '-' + str(j)], '*G' + str(j) + 'g' + str(('%.3f' % p[j][4][6]))])
+                link.append(['*G' + str(j) + 'g' + str(('%.3f' % p[j][4][6])), edge_p[str(p[j][2]) + '-' + str(j)], str(p[j][2])])
 
     print('loop end')
     res.append([node])  # res[0] 物质的坐标模型
@@ -134,11 +179,15 @@ def return_rand():
     edge = {}
     link = []
     tableData = []
+    edge_p = {}
+
     print('loop start')
+
     for i in randlist:
         node[str(b[i][0])] = [trans_symbols(b[i][0])]
         node[str(b[i][1])] = [trans_symbols(b[i][1])]
         node[str(b[i][2])] = [trans_symbols(b[i][2]), trans_xyz(b[i][2])]
+        # print(str(b[i][2]))
 
         element = []
         element.append(str(b[i][4][1]) + trans_symbols(b[i][0]))
@@ -151,20 +200,35 @@ def return_rand():
         edge[str(b[i][0]) + '-' + str(i)] = str(('%.3f' % b[i][4][0]))
         edge[str(b[i][1]) + '-' + str(i)] = str(('%.3f' % b[i][4][2]))
         edge[str(b[i][2]) + '-' + str(i)] = str(('%.3f' % b[i][4][4]))
-        node['*G' + str(i)] = str(('%.3f' % b[i][4][6]))
+        node['*G' + str(i) + 'g' + str(('%.3f' % b[i][4][6]))] = str(('%.3f' % b[i][4][6]))
 
-        link.append([str(b[i][0]), edge[str(b[i][0]) + '-' + str(i)], '*G' + str(i)])
-        link.append([str(b[i][1]), edge[str(b[i][1]) + '-' + str(i)], '*G' + str(i)])
-        link.append(['*G' + str(i), edge[str(b[i][2]) + '-' + str(i)], str(b[i][2])])
+        link.append([str(b[i][0]), edge[str(b[i][0]) + '-' + str(i)], '*G' + str(i) + 'g' + str(('%.3f' % b[i][4][6]))])
+        link.append([str(b[i][1]), edge[str(b[i][1]) + '-' + str(i)], '*G' + str(i) + 'g' + str(('%.3f' % b[i][4][6]))])
+        link.append(['*G' + str(i) + 'g' + str(('%.3f' % b[i][4][6])), edge[str(b[i][2]) + '-' + str(i)], str(b[i][2])])
 
-    # print('tableData', tableData)
+        for j in range(len(p)):
+            # print('pppppp', str(p[j][0]), str(p[j][1]))
+            if str(b[i][2]) == str(p[j][0]) or str(b[i][2]) == str(p[j][1]):
+                # print('yesyesyesyesyeysysysyyssysy')
+                node[str(p[j][0])] = [trans_symbols(p[j][0]), trans_xyz(p[j][0])]
+                node[str(p[j][1])] = [trans_symbols(p[j][1]), trans_xyz(p[j][1])]
+                node[str(p[j][2])] = [trans_symbols(p[j][2]), trans_xyz(p[j][2])]
+
+                edge_p[str(p[j][0]) + '-' + str(j)] = str(('%.3f' % p[j][4][0]))
+                edge_p[str(p[j][1]) + '-' + str(j)] = str(('%.3f' % p[j][4][2]))
+                edge_p[str(p[j][2]) + '-' + str(j)] = str(('%.3f' % p[j][4][4]))
+                node['*G' + str(j) + 'g' + str(('%.3f' % p[j][4][6]))] = str(('%.3f' % p[j][4][6]))
+
+                link.append([str(p[j][0]), edge_p[str(p[j][0]) + '-' + str(j)], '*G' + str(j) + 'g' + str(('%.3f' % p[j][4][6]))])
+                link.append([str(p[j][1]), edge_p[str(p[j][1]) + '-' + str(j)], '*G' + str(j) + 'g' + str(('%.3f' % p[j][4][6]))])
+                link.append(['*G' + str(j) + 'g' + str(('%.3f' % p[j][4][6])), edge_p[str(p[j][2]) + '-' + str(j)], str(p[j][2])])
 
     print('loop end')
 
     res.append([node])
     res.append(link)
     res.append(tableData)
-    # print('3333333333333', res[1])
+    # print('3333333333333', res[0][0])
     return {"tabledata": res}
 
 
@@ -175,8 +239,13 @@ def trans_symbols(atoms_id):
         return 'H2'
     else:
         return str(rows[atoms_id - 1].toatoms().symbols)
+    # for row in rows:
+    #     atoms = row.toatoms()
+    #     if row.id == id:
+    #         return str(atoms.symbols)
 
 def trans_xyz(row_id):
+    # print(data['SMILES1'])
     if row_id == 140001:
         pass
         # patt = Chem.MolFromSmiles('[H][H]')
