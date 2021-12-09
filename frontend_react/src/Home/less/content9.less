@@ -8,22 +8,22 @@
   }
   .@{content9} {
     min-height: 800px;
-    padding: 64px 0 0;
+    padding: 30px 0 0;
   }
-  .timeline {
-    position: relative;
-    &:before {
-      display: block;
-      content: '';
-      position: absolute;
-      left: 50%;
-      top: 0;
-      width: 0;
-      height: ~"calc(100% - 108px)";
-      margin: 34px 0;
-      border-left: 2px #ebedf0 dashed;
-    }
-  }
+  // .timeline {
+  //   position: relative;
+  //   &:before {
+  //     display: block;
+  //     content: '';
+  //     position: absolute;
+  //     left: 50%;
+  //     top: 0;
+  //     width: 0;
+  //     height: ~"calc(140% - 200px)";
+  //     // margin: 34px 0;
+  //     border-left: 3px #ebedf0 dashed;
+  //   }
+  // }
   .block-wrapper {
     color: @text-color;
     display: flex;
@@ -34,17 +34,21 @@
       margin-bottom: 0;
     }
   }
-  .image-wrapper,
+  .image-wrapper{
+    width: 50%;
+  }
   .text-wrapper {
     width: 50%;
   }
   .image-wrapper {
+    margin-left: 70px;
+    margin-right: 10px;
     text-align: center;
     .block-img,
     .name-wrapper {
       float: right;
       clear: both;
-      width: 262px;
+      width: 300px;
       margin: auto;
     }
     .block-img {
@@ -64,9 +68,17 @@
         color: @text-color2;
       }
     }
+    .block-title {
+      border-radius: 50px;
+      background-color: #fff;
+      margin: 20px 0 12px;
+      font-size: 14px;
+      position: relative;
+      min-height: 18px;
+      box-shadow: 0px 0px 20px #697b8c
+    }
   }
   .text-wrapper {
-    padding-left: 40px;
     .block-time {
       font-size: 12px;
       color: @text-color2;
@@ -74,10 +86,13 @@
       min-height: 18px;
     }
     .block-title {
-      margin: 8px 0 12px;
+      border-radius: 50px;
+      background-color: #fff;
+      margin: 20px 0 12px;
       font-size: 14px;
       position: relative;
       min-height: 18px;
+      box-shadow: 0px 0px 20px  #697b8c
     }
     .block-icon {
       position: absolute;
@@ -122,7 +137,7 @@
       .name-wrapper {
         text-align: left;
         float: left;
-        width: 100%;
+        width: 100%;  // 和父亲盒子一样宽
         padding-left: 40px;
         margin: auto;
       }

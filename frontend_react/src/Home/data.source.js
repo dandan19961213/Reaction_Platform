@@ -1,4 +1,6 @@
 import React from 'react';
+import Method from './Method';
+
 export const Banner30DataSource = {
   wrapper: { className: 'banner3 kvq9rt4g9l7-editor_css' },
   textWrapper: {
@@ -23,6 +25,7 @@ export const Banner30DataSource = {
       {
         name: 'button',
         className: 'banner3-button',
+        // children: <a href='inqure.html' target='__blank' >反应查询</a>,
         children: '反应查询',
         type: 'primary',
         href: '',
@@ -30,6 +33,7 @@ export const Banner30DataSource = {
     ],
   },
 };
+
 export const Content90DataSource = {
   wrapper: { className: 'home-page-wrapper content9-wrapper' },
   page: { className: 'home-page content9 kvq9si4ts-editor_css' },
@@ -42,9 +46,10 @@ export const Content90DataSource = {
           'https://gw.alipayobjects.com/zos/rmsportal/PiqyziYmvbgAudYfhuBr.svg',
         className: 'title-image',
       },
-      { name: 'title', children: '反应图谱及其方程式', className: 'title-h1' },
+      { name: 'title', children: '反应图谱展示', className: 'title-h1' },
     ],
   },
+
   block: {
     className: 'timeline kvq9ynyys5-editor_css',
     children: [
@@ -55,60 +60,47 @@ export const Content90DataSource = {
         children: {
           imgWrapper: { className: 'image-wrapper' },
           textWrapper: { className: 'text-wrapper' },
-          img: {
-            className: 'block-img kvq9z1x7mw-editor_css',
-            children:
-              'https://gw.alipayobjects.com/zos/rmsportal/SlFgHDtOTLzccvFrQHLg.png',
+
+          title_l_des: {
+            className: 'left_des',
+            children: (
+              <div>
+                合成气反应网络
+              </div>
+            ),
           },
-          icon: {
-            className: 'block-icon',
-            children:
-              'https://gw.alipayobjects.com/zos/rmsportal/qJnGrvjXPxdKETlVSrbe.svg',
-          },
-          name: { className: 'block-name', children: '姓名' },
-          post: { className: 'block-post', children: '公司 职位' },
-          time: { className: 'block-time', children: '09:00 - 10:00' },
-          title: {
+        
+          title_l: {
             className: 'block-title',
+            id: 'echart-ch',
+            children: (
+              <div>  
+                <Method url='method3' ids='echart-ch'></Method>
+              </div>
+            ),
+          },
+
+          title_r_des: {
+            className: 'right_des',
+            children: (
+              <div>
+                乙二醇反应网络
+              </div>
+            ),
+          },
+
+          title_r: {
+            className: 'block-title',
+            id: 'echart-EG',
             children: (
               <span>
-                <span>
-                  <h2>开幕致辞</h2>
-                </span>
+                <Method url='method3_EG' ids='echart-EG'></Method>
               </span>
             ),
           },
-          content: { className: 'block-content', children: '' },
+
         },
       },
-      // {
-      //   name: 'block1',
-      //   className: 'block-wrapper',
-      //   playScale: 0.3,
-      //   children: {
-      //     imgWrapper: { className: 'image-wrapper' },
-      //     textWrapper: { className: 'text-wrapper' },
-      //     img: {
-      //       className: 'block-img',
-      //       children:
-      //         'https://gw.alipayobjects.com/zos/rmsportal/SlFgHDtOTLzccvFrQHLg.png',
-      //     },
-      //     icon: {
-      //       className: 'block-icon',
-      //       children:
-      //         'https://gw.alipayobjects.com/zos/rmsportal/QviGtUPvTFxdhsTUAacr.svg',
-      //     },
-      //     name: { className: 'block-name', children: '姓名' },
-      //     post: { className: 'block-post', children: '公司 职位' },
-      //     time: { className: 'block-time', children: '09:00 - 10:00' },
-      //     title: { className: 'block-title', children: '演示标题 - XYZ' },
-      //     content: {
-      //       className: 'block-content',
-      //       children:
-      //         '经过近 3 年的打磨，在助力中台产品研发效能提升的目标之上，包含设计语言、UI 资产、可视化以及产品体验相关的蚂蚁中台设计体系正在逐步成型。此次分享包含两部分，在介绍蚂蚁设计体系的同时，也会和大家分享我们在设计语言的部分探索。',
-      //     },
-      //   },
-      // },
     ],
   },
 };

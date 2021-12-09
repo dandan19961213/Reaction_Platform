@@ -98,7 +98,7 @@ def return_table():
         res4.append(temp4)
         res.append(res3)
         res.append(res4)
-        # print('111111111111111111', res)
+        print('111111111111111111', res)
 
         return {"tabledata": res}
 

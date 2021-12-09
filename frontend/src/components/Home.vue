@@ -50,23 +50,6 @@
                 </el-option>
               </el-select>
               </div></el-col> 
-                    <!-- <el-col :span="4">
-                      <div id="select" style="margin-top:50px; padding-right: 50px">
-                      <div class="sub-title">step #3</div>
-                      <el-select
-                        clearable
-                        v-model="select3"
-                        placeholder="△G"
-                      >
-                        <el-option
-                          v-for="item in option3"
-                          :key="item.value"
-                          :label="item.label"
-                          :value="item.value"
-                      >
-                        </el-option>
-                      </el-select>    
-                      </div></el-col> -->
               <div id="shuoming">
               <span>step #1：请输入化学反应范围起点（总计84个反应）</span>
               <span>step #2：请选择化学反应数量</span><br>
@@ -458,8 +441,10 @@ export default {
         .then((response) => {
           var res_data = response.data;
           console.log(res_data);
+          console.log(res_data.tabledata);
           self.initChart(res_data.tabledata);
           this.tableList3 = res_data.tabledata[2]
+          console.log(this.tableList3);
           this.showMol = false;
           this.showUpload = false;
           this.showResult = false;       
@@ -493,7 +478,7 @@ ul li{list-style: decimal; text-align:left; text-indent:1em;}
 #result3{height:700px; overflow-y: auto;}
 #header {
   background-color: #ffffff;
-  //color: #fff;
+  /* color: #fff; */
   color: #6b6c6f;
   font-size: 30px;
   line-height: 47px;

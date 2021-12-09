@@ -44,4 +44,5 @@ class Banner extends React.PureComponent {
     );
   }
 }
+
 export default Banner;

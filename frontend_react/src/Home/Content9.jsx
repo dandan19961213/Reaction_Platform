@@ -14,23 +14,18 @@ class Content9 extends React.PureComponent {
         delay={isMobile ? [0, 100] : 0}
         {...item.textWrapper}
       >
-        <div key="time" {...item.time}>
-          {item.time.children}
+        <div key="title_r_des" {...item.title_r_des}>
+          {item.title_r_des.children}
         </div>
-        <h2 key="title" {...item.title}>
-          <i {...item.icon}>
-            <img src={item.icon.children} alt="img" />
-          </i>
-          {item.title.children}
-        </h2>
-        <div key="p" {...item.content}>
-          {item.content.children}
+        <div key="title_r" {...item.title_r}>
+          {item.title_r.children}
         </div>
       </QueueAnim>
     );
     return (
       <OverPack key={i.toString()} {...block}>
         {isMobile && textWrapper}
+
         <QueueAnim
           className="image-wrapper"
           key="image"
@@ -39,24 +34,17 @@ class Content9 extends React.PureComponent {
           delay={isMobile ? [100, 0] : 0}
           {...item.imgWrapper}
         >
-          <div key="image" {...item.img}>
-            <img src={item.img.children} alt="img" />
+          <div key="title_l_des" {...item.title_l_des}>
+            {item.title_l_des.children}
           </div>
-          <div key="name" className="name-wrapper">
-            <div key="name" {...item.name}>
-              {item.name.children}
-            </div>
-            <div key="post" {...item.post}>
-              {item.post.children}
-            </div>
+          <div key="title_l" {...item.title_l}>
+            {item.title_l.children}
           </div>
         </QueueAnim>
-
         {!isMobile && textWrapper}
       </OverPack>
     );
   };
-
   render() {
     const { ...props } = this.props;
     const { dataSource } = props;

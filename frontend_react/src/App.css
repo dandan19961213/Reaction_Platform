@@ -1,4 +1,4 @@
-.App {
+/* .App {
   text-align: center;
 }
 
@@ -35,4 +35,60 @@
   to {
     transform: rotate(360deg);
   }
+} */
+
+h4 {
+  text-align: center;
+}
+
+.Method {
+  color: black;
+  font: size 20px;
+}
+
+.Display {
+  color: #0f0f0f;
+}
+
+.ul3 {
+  list-style: decimal; 
+  width:400px; 
+  margin:0 auto;
+  height:650px; 
+  overflow-y: auto;
+}
+.ul3 li {
+  list-style: decimal; 
+  text-align: center; 
+  /* text-indent:0.5em; */
+  margin-bottom:10px;
+}
+.Display-img {
+  height: 40vmin;
+  pointer-events: none;
+}
+@media (prefers-reduced-motion: no-preference) {
+  .Display-img {
+    width: 130px;
+    height: 100px;
+    vertical-align: middle;
+    position: 'absolute';
+  }
+}
+
+#echart-ch{width:90%; height:650px; float:left}
+#echart-EG{width:90%; height:650px; float:left}
+.echart {
+  width: '100%';
+  margin: '10px auto 0';
+  height: '700px'
+}
+
+.left_des,
+.right_des{
+  width: 200px;
+  background-color:aliceblue;
+  font-size: large;
+  text-align: center;
+  margin: auto
 }
