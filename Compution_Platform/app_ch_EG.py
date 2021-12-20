@@ -252,17 +252,23 @@ def return_rand_EG():
     link = []
     print('loop start')
     for i in randlist:
+        # str(b[i][0])物质的ID；trans_symbols(b[i][0])物质的化学式；trans_xyz(b[i][0])物质的坐标
         node[str(b[i][0])] = [trans_symbols(b[i][0]), trans_xyz(b[i][0])]
         node[str(b[i][1])] = [trans_symbols(b[i][1]), trans_xyz(b[i][1])]
         node[str(b[i][2])] = [trans_symbols(b[i][2]), trans_xyz(b[i][2])]
 
+        # str(('%.3f' % b[i][4][0]))物质的吉布斯自由能
         edge[str(b[i][0]) + '-' + str(i)] = str(('%.3f' % b[i][4][0]))
         edge[str(b[i][1]) + '-' + str(i)] = str(('%.3f' % b[i][4][2]))
         edge[str(b[i][2]) + '-' + str(i)] = str(('%.3f' % b[i][4][4]))
+
+        # '*G' + str(i)第几条反应；str(('%.3f' % b[i][4][6]))反应后的能量差
         node['*G' + str(i)] = str(('%.3f' % b[i][4][6]))
 
+        # link(反应物id，反应物吉布斯自由能，第几条反应)
         link.append([str(b[i][0]), edge[str(b[i][0]) + '-' + str(i)], '*G' + str(i)])
         link.append([str(b[i][1]), edge[str(b[i][1]) + '-' + str(i)], '*G' + str(i)])
+        # link(第几条反应，生成物布斯自由能，生成物ID）
         link.append(['*G' + str(i), edge[str(b[i][2]) + '-' + str(i)], str(b[i][2])])
 
     print('loop end')
@@ -282,7 +288,8 @@ def trans_symbols(atoms_id):
     # for row in rows:
     #     atoms = row.toatoms()
     #     if row.id == id:
-    #         return str(atoms.symbols)
+    #         return str(atoms.symbols)y
+
 
 def trans_xyz(row_id):
     # print(data['SMILES1'])
@@ -306,6 +313,14 @@ def trans_xyz(row_id):
         result = repr(res[:-2])
         return result
 
+@app.route('/query_reaction', methods=['POST'])
+def get_query_data():
+    item = json.loads(request.get_data(as_text=True))
+    print('查询获取的表单数据', item)
+    print('species', item['species'])
+    print('tem', item['temperature'])
+    path = './video/rmg.avi'
+    return{"path": path}
 
 if __name__ == '__main__':
     # print(data)

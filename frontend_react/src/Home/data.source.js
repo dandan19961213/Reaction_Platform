@@ -1,5 +1,8 @@
 import React from 'react';
 import Method from './Method';
+import Query from './Query';
+
+var commonUrl = 'http://10.3.104.32:8088/'
 
 export const Banner30DataSource = {
   wrapper: { className: 'banner3 kvq9rt4g9l7-editor_css' },
@@ -75,7 +78,7 @@ export const Content90DataSource = {
             id: 'echart-ch',
             children: (
               <div>  
-                <Method url='method3' ids='echart-ch'></Method>
+                <Method url={commonUrl+'method3'}  ids='echart-ch'></Method>
               </div>
             ),
           },
@@ -94,7 +97,7 @@ export const Content90DataSource = {
             id: 'echart-EG',
             children: (
               <span>
-                <Method url='method3_EG' ids='echart-EG'></Method>
+                <Method url={commonUrl+'method3_EG'} ids='echart-EG'></Method>
               </span>
             ),
           },
@@ -104,6 +107,30 @@ export const Content90DataSource = {
     ],
   },
 };
+
+export const Content80DataSource = {
+  wrapper: { className: 'home-page-wrapper content8-wrapper' },
+  page: { className: 'home-page content8' },
+  OverPack: { playScale: 0.3 },
+  titleWrapper: {
+    className: 'title-wrapper',
+    children: [
+      {
+        name: 'image',
+        children:
+          'https://gw.alipayobjects.com/zos/rmsportal/PiqyziYmvbgAudYfhuBr.svg',
+        className: 'title-image',
+      },
+      { name: 'title', children: '反应查询', className: 'title-h1' },
+    ],
+  },
+  block: {
+    className: 'content-wrapper',
+    children: <Query url={commonUrl+'query_reaction'}> </Query>,
+  },
+};
+
+
 export const Footer20DataSource = {
   wrapper: { className: 'home-page-wrapper footer2-wrapper' },
   OverPack: { className: 'home-page footer2', playScale: 0.05 },

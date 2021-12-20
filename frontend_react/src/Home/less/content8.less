@@ -1,0 +1,90 @@
+@content8: content8;
+.@{content8}-wrapper {
+  &.home-page-wrapper {
+    overflow: initial;
+    width: ~"calc(100% - 112px)";
+    min-height: 600px;
+    margin: auto;
+    border-radius: 4px;
+    box-shadow: 0 32px 32px rgba(34, 94, 222, 0.08);
+    background: #fff;
+    & .home-page {
+      margin-top: 50px;
+      padding: 64px 24px;
+      overflow: hidden;
+    }
+  }
+  .content-wrapper {
+    display: block;
+    margin-top: 72px;
+    .@{content8}-block-wrapper {
+      // margin-bottom: 60px;
+      text-align: center;
+    }
+    .@{content8}-title {
+      font-size: 50px;
+      color: #0d1a26;
+      font-weight: 400;
+      margin: 24px auto 8px;
+      text-align: center;
+      white-space: nowrap;
+    }
+    .@{content8}-content {
+      text-align: center;
+      white-space: nowrap;
+      font-size: 50px;
+      color: #697b8c;
+    }
+  }
+  .show{
+    width: 400px;
+    text-align: left;
+  }
+
+  .ant-form {
+    margin-left: 280px;
+  }
+  .ant-form-item{
+    width: 1000px;
+  }
+  .ant-form-item-label {
+    text-align: right;
+    margin-right: 15px;
+  }
+  .ant-col-8 {
+    flex: 0 0 15%;
+    font-size: 20px;
+  }
+  .ant-select:not(.ant-select-customize-input) .ant-select-selector {
+    height:40px
+  }
+  .ant-form-item-label > label {
+    font-size: 20px
+  }
+  .ant-select {
+    font-size: 17px;
+  }
+  .ant-btn-primary .ant-btn, .ant-btn:active, .ant-btn:focus {
+    height: 40px;
+    width: 100px;
+  }
+}
+
+@media screen and (max-width: 767px) {
+  .@{content8}-wrapper.home-page-wrapper {
+    padding-bottom: 0;
+    box-shadow: none;
+    width: 100%;
+    .@{content8} {
+      &.home-page {
+        margin: auto;
+        padding-bottom: 0;
+      }
+    }
+    .content-wrapper {
+      .@{content8}-block {
+        max-width: 600px;
+      }
+    }
+  }
+}

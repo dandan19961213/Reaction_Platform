@@ -4,7 +4,7 @@ import '../App.css';
 
 const Method = (props) => {
     console.log(props);
-    var url = 'http://10.3.76.51:8088/' + props.url
+    var url = props.url
     var data = {text: '0', text2: '10'}
     // var [tableList3, setTableList3] = React.useState([]);
 
