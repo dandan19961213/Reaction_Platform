@@ -319,7 +319,7 @@ def get_query_data():
     print('查询获取的表单数据', item)
     print('species', item['species'])
     print('tem', item['temperature'])
-    path = './video/rmg.avi'
+    path = './video/'+item['temperature']+'.mp4'
     return{"path": path}
 
 if __name__ == '__main__':

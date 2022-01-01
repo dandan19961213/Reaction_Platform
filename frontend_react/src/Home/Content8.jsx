@@ -18,6 +18,7 @@ class Content8 extends React.PureComponent {
           <div {...dataSource.titleWrapper}>
             {dataSource.titleWrapper.children.map(getChildrenToRender)}
           </div>
+          <div>
           <OverPack {...dataSource.OverPack}>
             <QueueAnim type="bottom" key="img">
               <Row {...dataSource.block} key="img">
@@ -25,6 +26,10 @@ class Content8 extends React.PureComponent {
               </Row>
             </QueueAnim>
           </OverPack>
+          </div>
+          <div {...dataSource.upWrapper}>
+            {dataSource.upWrapper.children.map(getChildrenToRender)}
+          </div>
         </div>
       </div>
     );

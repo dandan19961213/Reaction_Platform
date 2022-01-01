@@ -1,7 +1,6 @@
 import '../App.css';
 import React, { useState } from 'react';
-import {  Form, Input, Button, Select  } from 'antd';
-import './video/rmg.avi'
+import {  Form, Button, Select  } from 'antd';
 const { Option } = Select;
 const layout = {
   labelCol: {
@@ -19,10 +18,12 @@ const tailLayout = {
 };
 
 const ShowResult = (props)=> {
-    console.log('展示出来', props.url);
+    console.log('展示出来', props.url); 
     return(
-        <video src={props.url} height="300px" width="500px" controls="controls">
-        </video>
+        <div align='center'>
+            <video id="rmg_video" src={props.url} controls="controls"></video>
+            
+        </div>
     )
 };
 
@@ -31,7 +32,7 @@ const Query = (props) => {
 
     var url = props.url
 
-    var [myPath, setMyPath] = React.useState([]);
+    var [myPath, setMyPath] = useState([]);
 
     const OnFinish = (values) => {
         var data = values;
@@ -60,51 +61,63 @@ const Query = (props) => {
 
     return (
         <div>
-            <Form {...layout} form={form} name="control-hooks" onFinish={OnFinish}>
-            <Form.Item
-                name="species"
-                label="Species"
-                rules={[
-                {
-                    required: true,
-                },
-                ]}
-            >
-                <Select
-                id="mySpecies"
-                placeholder="请选择反应物"
-                allowClear
+            <div>
+                <Form {...layout} form={form} name="control-hooks" onFinish={OnFinish}>
+                <Form.Item
+                    name="species"
+                    label="Species"
+                    rules={[
+                    {
+                        required: true,
+                    },
+                    ]}
                 >
-                <Option value="乙烷">乙烷</Option>
-                </Select>
-            </Form.Item>
-            <Form.Item
-                name="temperature"
-                label="Temperature"
-                rules={[
-                {
-                    required: true,
-                },
-                ]}
-            >
-                <Select
-                id="myTemperature"
-                placeholder="请选择温度"
-                allowClear
+                    <Select
+                    id="mySpecies"
+                    placeholder="请选择反应物"
+                    allowClear
+                    >
+                    <Option value="乙烷">乙烷</Option>
+                    </Select>
+                </Form.Item>
+                <Form.Item
+                    name="temperature"
+                    label="Temperature"
+                    rules={[
+                    {
+                        required: true,
+                    },
+                    ]}
                 >
-                <Option value=" 1350 k ">1350 'k'</Option>
-                </Select>
-            </Form.Item>
-            <Form.Item {...tailLayout}>
-                <Button type="primary" htmlType="submit" >
-                Submit
-                </Button>
-                <Button htmlType="button" onClick={onReset}>
-                Reset
-                </Button>
-            </Form.Item>
-            </Form>
-            <ShowResult url="./video/11.mp4"></ShowResult>
+                    <Select
+                    id="myTemperature"
+                    placeholder="请选择温度"
+                    allowClear
+                    >
+                    <Option value="1350">1350 'k'</Option>
+                    <Option value="1000">1000 'k'</Option>
+                    </Select>
+                </Form.Item>
+                <Form.Item {...tailLayout}>
+                    <Button type="primary" htmlType="submit" >
+                    Submit
+                    </Button>
+                    <Button htmlType="button" onClick={onReset}>
+                    Reset
+                    </Button>
+                </Form.Item>
+                </Form>
+            </div>
+
+            { 
+                (myPath.length === 0)
+                ? (<div> </div>)
+                : (
+                    <div>
+                        <ShowResult url={myPath}></ShowResult>
+                    </div>
+                )
+            }
         </div>
     );
 }

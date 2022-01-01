@@ -2,11 +2,12 @@ import React from 'react';
 import Method from './Method';
 import Query from './Query';
 
-var commonUrl = 'http://10.3.104.32:8088/'
+var commonUrl = 'http://10.3.94.203:8088/'
 
 export const Banner30DataSource = {
   wrapper: { className: 'banner3 kvq9rt4g9l7-editor_css' },
   textWrapper: {
+    id: 'query_up',
     className: 'banner3-text-wrapper kvq9r5hufvf-editor_css',
     children: [
       {
@@ -28,10 +29,10 @@ export const Banner30DataSource = {
       {
         name: 'button',
         className: 'banner3-button',
-        // children: <a href='inqure.html' target='__blank' >反应查询</a>,
-        children: '反应查询',
+        children: <a href='#queryReaction'>反应查询</a>,
+        // children: '反应查询',
         type: 'primary',
-        href: '',
+        // href: '#queryReaction',
       },
     ],
   },
@@ -113,6 +114,7 @@ export const Content80DataSource = {
   page: { className: 'home-page content8' },
   OverPack: { playScale: 0.3 },
   titleWrapper: {
+    id: 'queryReaction',
     className: 'title-wrapper',
     children: [
       {
@@ -127,6 +129,14 @@ export const Content80DataSource = {
   block: {
     className: 'content-wrapper',
     children: <Query url={commonUrl+'query_reaction'}> </Query>,
+  },
+  upWrapper: {
+    className: 'up-wrapper',
+    children: [
+      { name: 'up',  
+      children: <a href='#query_up'>Up</a>,
+      className: 'up-to-top' },
+    ],
   },
 };
 
@@ -145,7 +155,7 @@ export const Footer20DataSource = {
       },
       {
         name: 'group',
-        children: '蚂蚁金服体验科技大会',
+        children: '北京信息科技大学',
         className: 'copyright-group',
       },
       {
@@ -156,7 +166,7 @@ export const Footer20DataSource = {
       },
       {
         name: 'copyright',
-        children: 'Copyright © 蚂蚁金融服务集团',
+        children: 'BISTU © 计算机学院',
         className: 'copyright-text',
       },
     ],
