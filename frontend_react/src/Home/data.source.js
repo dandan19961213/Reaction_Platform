@@ -2,7 +2,7 @@ import React from 'react';
 import Method from './Method';
 import Query from './Query';
 
-var commonUrl = 'http://10.3.94.203:8088/'
+var commonUrl = 'http://192.168.2.170:8088/'
 
 export const Banner30DataSource = {
   wrapper: { className: 'banner3 kvq9rt4g9l7-editor_css' },
