@@ -2,30 +2,13 @@ import React from 'react';
 import OverPack from 'rc-scroll-anim/lib/ScrollOverPack';
 import QueueAnim from 'rc-queue-anim';
 import { getChildrenToRender } from './utils';
+import {Row, Col} from 'antd';
 
 class Content9 extends React.PureComponent {
   getBlockChildren = (block, i) => {
     const { isMobile } = this.props;
     const item = block.children;
-    const textWrapper = (
-      <QueueAnim
-        key="text"
-        leaveReverse
-        delay={isMobile ? [0, 100] : 0}
-        {...item.textWrapper}
-      >
-        <div key="title_r_des" {...item.title_r_des}>
-          {item.title_r_des.children}
-        </div>
-        <div key="title_r" {...item.title_r}>
-          {item.title_r.children}
-        </div>
-      </QueueAnim>
-    );
-    return (
-      <OverPack key={i.toString()} {...block}>
-        {isMobile && textWrapper}
-
+    const imageWrapper = (
         <QueueAnim
           className="image-wrapper"
           key="image"
@@ -41,8 +24,33 @@ class Content9 extends React.PureComponent {
             {item.title_l.children}
           </div>
         </QueueAnim>
-        {!isMobile && textWrapper}
-      </OverPack>
+    );
+    const textWrapper = (
+      <QueueAnim
+        key="text"
+        leaveReverse
+        delay={isMobile ? [0, 100] : 0}
+        {...item.textWrapper}
+      >
+      <div>
+        <div key="title_r_des" {...item.title_r_des}>
+          {item.title_r_des.children}
+        </div>
+        <div key="title_r" {...item.title_r}>
+          {item.title_r.children}
+        </div>
+      </div>
+      </QueueAnim>
+    );
+    return (
+      <Row gutter={[50, 50]} justify="space-around" align="middle">
+        <Col className="gutter-row" xs={24} sm={12} md={12} lg={12} xl={12} flex={1}>
+          {imageWrapper}
+        </Col>
+        <Col className="gutter-row" xs={24} sm={12} md={12} lg={12} xl={12} flex={1}>
+          {textWrapper}
+        </Col>
+      </Row>
     );
   };
   render() {
@@ -57,7 +65,9 @@ class Content9 extends React.PureComponent {
           <div {...dataSource.titleWrapper}>
             {dataSource.titleWrapper.children.map(getChildrenToRender)}
           </div>
-          <div {...dataSource.block}>{children}</div>
+          <div {...dataSource.block}>
+            {children}
+          </div>
         </div>
       </div>
     );

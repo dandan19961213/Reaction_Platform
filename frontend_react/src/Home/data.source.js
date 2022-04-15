@@ -1,8 +1,13 @@
 import React from 'react';
 import Method from './Method';
 import Query from './Query';
+import { BrowserRouter as Router, Routes, Route, Link} from 'react-router-dom';
+import { Button } from 'antd';
 
-var commonUrl = 'http://192.168.2.170:8088/'
+var commonUrl = 'http://47.95.121.241:8088/'
+// var commonUrl = 'http://192.168.2.170:8088/'
+
+
 
 export const Banner30DataSource = {
   wrapper: { className: 'banner3 kvq9rt4g9l7-editor_css' },
@@ -13,7 +18,8 @@ export const Banner30DataSource = {
       {
         name: 'nameEn',
         className: 'banner3-name-en',
-        children: 'Reaction Network & Computing Display Platform',
+        children: 'Calculation and Presentation for Reaction Network',
+        // children: 'Reaction Network & Computing Display Platform',
       },
       {
         name: 'slogan',
@@ -29,10 +35,8 @@ export const Banner30DataSource = {
       {
         name: 'button',
         className: 'banner3-button',
-        children: <a href='#queryReaction'>反应查询</a>,
-        // children: '反应查询',
+        children: <a href='/query'>反应查询</a>,
         type: 'primary',
-        // href: '#queryReaction',
       },
     ],
   },
@@ -108,38 +112,6 @@ export const Content90DataSource = {
     ],
   },
 };
-
-export const Content80DataSource = {
-  wrapper: { className: 'home-page-wrapper content8-wrapper' },
-  page: { className: 'home-page content8' },
-  OverPack: { playScale: 0.3 },
-  titleWrapper: {
-    id: 'queryReaction',
-    className: 'title-wrapper',
-    children: [
-      {
-        name: 'image',
-        children:
-          'https://gw.alipayobjects.com/zos/rmsportal/PiqyziYmvbgAudYfhuBr.svg',
-        className: 'title-image',
-      },
-      { name: 'title', children: '反应查询', className: 'title-h1' },
-    ],
-  },
-  block: {
-    className: 'content-wrapper',
-    children: <Query url={commonUrl+'query_reaction'}> </Query>,
-  },
-  upWrapper: {
-    className: 'up-wrapper',
-    children: [
-      { name: 'up',  
-      children: <a href='#query_up'>Up</a>,
-      className: 'up-to-top' },
-    ],
-  },
-};
-
 
 export const Footer20DataSource = {
   wrapper: { className: 'home-page-wrapper footer2-wrapper' },

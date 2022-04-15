@@ -38,11 +38,20 @@ h4 {
   }
 }
 
-#echart-ch{width:90%; height:650px; float:left}
-#echart-EG{width:90%; height:650px; float:left}
+@media (max-width: 767px) {
+  #echart-ch{height:450px}
+  #echart-EG{height:450px}
+}
+@media (min-width: 767px) {
+  #echart-ch{height:650px}
+  #echart-EG{height:650px}
+}
+
+/* #echart-ch{height:650px} */
+/* #echart-EG{height:650px} */
 .echart {
-  width: '100%';
-  margin: '10px auto 0';
+  /* width: '100%'; */
+  /* margin: '10px auto 0'; */
   height: '700px'
 }
 
@@ -52,12 +61,12 @@ h4 {
   background-color:aliceblue;
   font-size: large;
   text-align: center;
-  margin: auto
+  margin: auto;
+  margin-bottom: 20px;
 }
 
-.show {
+/* .show {
   height: 100px;
   width: 100px;
-}
-
+} */
 

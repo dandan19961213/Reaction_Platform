@@ -1,7 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
-import App from './Home';
+import App from './router.jsx';
 // import Inqure from './Home1';
 
 import reportWebVitals from './reportWebVitals';

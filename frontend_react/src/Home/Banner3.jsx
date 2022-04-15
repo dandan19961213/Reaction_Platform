@@ -3,6 +3,8 @@ import { Button } from 'antd';
 import QueueAnim from 'rc-queue-anim';
 import Texty from 'rc-texty';
 import 'rc-texty/assets/index.css';
+import { Link } from "react-router-dom";
+// import styles from './less/banner3.less';
 
 class Banner extends React.PureComponent {
   render() {
@@ -14,9 +16,14 @@ class Banner extends React.PureComponent {
       const { name, texty, ...$item } = item;
       if (name.match('button')) {
         return (
-          <Button type="primary" key={name} {...$item}>
-            {item.children}
-          </Button>
+          <div>
+            <Button type="primary"  key={name} {...$item}>
+              <Link to="/query">反应查询</Link>
+            </Button>
+            {/* <Button type="primary" key={name} {...$item}>
+                  {item.children}
+                </Button> */}
+          </div>
         );
       }
 

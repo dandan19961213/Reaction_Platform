@@ -2,6 +2,7 @@
   "name": "c_h_frontend",
   "version": "0.1.0",
   "private": true,
+  "homepage":".",
   "dependencies": {
     "@ant-design/compatible": "^1.0.8",
     "@testing-library/jest-dom": "^5.11.4",
