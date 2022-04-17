@@ -1,11 +1,10 @@
 import React from 'react';
 import Method from './Method';
-import Query from './Query';
 import { BrowserRouter as Router, Routes, Route, Link} from 'react-router-dom';
 import { Button } from 'antd';
 
-var commonUrl = 'http://47.95.121.241:8088/'
-// var commonUrl = 'http://192.168.2.170:8088/'
+// var commonUrl = 'http://47.95.121.241:8088/'
+var commonUrl = 'http://192.168.2.170:8088/'
 
 
 
@@ -35,7 +34,7 @@ export const Banner30DataSource = {
       {
         name: 'button',
         className: 'banner3-button',
-        children: <a href='/query'>反应查询</a>,
+        children: <a href='/user'>反应查询</a>,
         type: 'primary',
       },
     ],

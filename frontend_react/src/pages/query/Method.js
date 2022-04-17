@@ -1,6 +1,6 @@
 import React, { useEffect } from "react";
 import InitChart from "./InitChart";
-import '../App.css';
+import './App.css';
 
 const Method = (props) => {
     console.log(props);

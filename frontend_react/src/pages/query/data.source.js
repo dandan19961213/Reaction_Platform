@@ -4,8 +4,8 @@ import Query from './Query';
 import { BrowserRouter as Router, Routes, Route, Link} from 'react-router-dom';
 import { Button } from 'antd';
 
-var commonUrl = 'http://47.95.121.241:8088/'
-// var commonUrl = 'http://192.168.2.170:8088/'
+// var commonUrl = 'http://47.95.121.241:8088/'
+var commonUrl = 'http://192.168.2.170:8088/'
 
 export const Content80DataSource = {
   wrapper: { className: 'home-page-wrapper content8-wrapper' },

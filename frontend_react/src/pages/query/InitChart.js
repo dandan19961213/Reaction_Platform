@@ -1,5 +1,5 @@
 import * as echarts from "echarts";
-import '../App.css';
+import './App.css';
 
 const InitChart = (data, ids) => {
     console.log('调用initChart了', data)

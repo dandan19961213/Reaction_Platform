@@ -17,12 +17,9 @@ class Banner extends React.PureComponent {
       if (name.match('button')) {
         return (
           <div>
-            <Button type="primary"  key={name} {...$item}>
-              <Link to="/query">反应查询</Link>
+            <Button type="primary" key={name} {...$item}>
+              {item.children}
             </Button>
-            {/* <Button type="primary" key={name} {...$item}>
-                  {item.children}
-                </Button> */}
           </div>
         );
       }
